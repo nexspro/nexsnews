@@ -35,16 +35,16 @@ class ArticleTest < ActiveSupport::TestCase
     assert article.draft?
   end
 
-  test "published_recent_first returns published  articles with a publication date" do
+  test "published_recent_first returns published articles with a publication date" do
     assert_equal [ articles(:two) ], Article.published_recent_first.to_a
   end
 
   test "requires URL friendly slug" do
     article = Article.new(
-    title: "Invalid slug article",
-    slug: "Invalide Slug!",
-    body: "Invalid slug body",
-    status: :draft
+      title: "Invalid slug article",
+      slug: "Invalid Slug!",
+      body: "Invalid slug body",
+      status: :draft
     )
 
     assert_not article.valid?
