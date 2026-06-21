@@ -38,4 +38,16 @@ class ArticleTest < ActiveSupport::TestCase
   test "published_recent_first returns published  articles with a publication date" do
     assert_equal [ articles(:two) ], Article.published_recent_first.to_a
   end
+
+  test "requires URL friendly slug" do
+    article = Article.new(
+    title: "Invalid slug article",
+    slug: "Invalide Slug!",
+    body: "Invalid slug body",
+    status: :draft
+    )
+
+    assert_not article.valid?
+    assert_includes article.errors[:slug], "must use lowercase letters, numbers, and hyphens"
+  end
 end
