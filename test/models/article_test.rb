@@ -62,4 +62,8 @@ class ArticleTest < ActiveSupport::TestCase
     assert_not article.valid?
     assert_includes article.errors[:published_at], "must be set when article is published"
   end
+
+  test "uses slug as route parameter" do
+    assert_equal articles(:one).slug, articles(:one).to_param
+  end
 end
