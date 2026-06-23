@@ -22,6 +22,10 @@ class Article < ApplicationRecord
   validates :status, presence: true
   validate :published_article_has_published_at
 
+  def to_param
+    slug
+  end
+
   private
 
   def published_article_has_published_at
