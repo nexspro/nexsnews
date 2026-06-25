@@ -1,9 +1,19 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+Article.find_or_initialize_by(slug: "welcome-to-nexsnews").tap do |article|
+  article.update!(
+  title: "Welcome to NexsNews",
+  excerpt: "A first published article introducing the NexsNews project.",
+  body: "NexsNews is a technical publishing platform built with Ruby on Rails.",
+  status: :published,
+  published_at: Time.zone.parse("2026-06-25 12:00:00")
+  )
+end
+
+Article.find_or_initialize_by(slug: "draft-editorial-workflow").tap do |article|
+  article.update!(
+  title: "Draft editorial workflow",
+  excerpt: "A draft article reserved for future editorial workflow work.",
+  body: "This draft will help test upcoming moderation and publishing features.",
+  status: :draft,
+  published_at: nil
+  )
+end
